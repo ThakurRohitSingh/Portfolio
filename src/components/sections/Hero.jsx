@@ -19,7 +19,7 @@ export const Hero = () => {
     if (typingComplete) {
       const interval = setInterval(() => {
         setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
-      }, 3000);
+      }, 2000);
 
       return () => clearInterval(interval);
     }
