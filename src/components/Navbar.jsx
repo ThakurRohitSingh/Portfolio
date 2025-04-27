@@ -1,14 +1,51 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { Moon, Sun, Menu, X } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 
-import { Moon, Sun} from "lucide-react";
+const navLinks = [
+  { title: "Home", href: "#home" },
+  { title: "About", href: "#about" },
+  { title: "Projects", href: "#projects" },
+  { title: "Contact", href: "#contact" }
+];
 
 export const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      // Track active section
+      const sections = document.querySelectorAll('section');
+      const scrollPosition = window.scrollY + 100;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight && sectionId) {
+          setActiveSection(sectionId);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <header className={`fixed w-full top-0 z-50 transition-all duration-300 `}>
+    <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 h-16 md:h-20">
         <div className="flex items-center justify-between h-full">
           <div className="flex items-center">
@@ -23,7 +60,7 @@ export const Navbar = () => {
                 <li key={link.title}>
                   <a
                     href={link.href}
-                    className={`nav-link text-sm font-medium`}
+                    className={`nav-link text-sm font-medium ${activeSection === link.href.substring(1) ? 'active' : ''}`}
                   >
                     {link.title}
                   </a>
@@ -46,7 +83,7 @@ export const Navbar = () => {
               className="md:hidden p-2"
               aria-label="Toggle menu"
             >
-              
+
             </button>
           </div>
         </div>
