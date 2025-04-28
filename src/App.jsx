@@ -1,10 +1,18 @@
-import React from 'react'
-import { Hero } from './components/sections/Hero'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NotFound from './pages/NotFound';
+import Index from './pages/Index';
 
-const App = () => {
+
+function App() {
   return (
-    <Hero/>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
