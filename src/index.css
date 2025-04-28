@@ -4,4 +4,90 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 84% 5%;
+    --radius: 0.75rem;
+  }
 
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217 33% 18%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 18%;
+    --muted-foreground: 215 20% 65%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 212 27% 84%;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-bold;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 px-5 md:px-10 lg:px-20;
+  }
+
+  .skill-tag {
+    @apply inline-block px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-medium mr-2 mb-2;
+  }
+
+  .project-card {
+    @apply rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 bg-card;
+  }
+
+  .nav-link {
+    @apply relative transition-colors duration-300 hover:text-primary text-foreground;
+  }
+
+  .nav-link::after,
+  .active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-in-out;
+  }
+
+  .nav-link:hover::after,
+  .active::after {
+    @apply w-full;
+  }
+
+  .active {
+    @apply text-primary;
+  }
+
+  .social-icon {
+    @apply p-2 rounded-full bg-secondary transition-colors duration-300 hover:bg-primary hover:text-primary-foreground;
+  }
+}
