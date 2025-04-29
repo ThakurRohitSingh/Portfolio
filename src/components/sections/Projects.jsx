@@ -2,7 +2,7 @@ import React from 'react';
 import { projects } from '../../data/projects';
 import { Github, ExternalLink } from 'lucide-react';
 
-export const Projects = () => {
+const Projects = () => {
   return (
     <section id="projects" className="section-padding bg-gradient-to-b from-secondary/20 to-background">
       <div className="container mx-auto">
@@ -36,3 +36,4 @@ export const Projects = () => {
     </section>
   );
 };
+export default Projects
