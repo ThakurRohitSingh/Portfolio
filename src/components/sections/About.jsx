@@ -2,7 +2,7 @@ import React from "react";
 import { skillCategories } from "../../data/skills";
 import { Download } from 'lucide-react';
 
-export const About = () => {
+const About = () => {
   return (
     <section id="about" className="section-padding bg-gradient-to-b from-background to-secondary/20">
       <div className="container mx-auto">
@@ -52,3 +52,4 @@ export const About = () => {
     </section>
   );
 };
+export default About;

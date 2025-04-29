@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-export const Hero = () => {
+const Hero = () => {
   const titles = ["Developer", "Designer", "Creator"];
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
 
@@ -71,3 +71,4 @@ export const Hero = () => {
     </section>
   );
 };
+export default Hero;
