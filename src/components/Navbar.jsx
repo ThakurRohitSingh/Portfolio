@@ -10,7 +10,7 @@ const navLinks = [
   { title: "Contact", href: "#contact" }
 ];
 
-export const Navbar = () => {
+ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const { theme, setTheme } = useTheme();
@@ -79,7 +79,7 @@ export const Navbar = () => {
             </button>
 
             <button
-              
+
               className="md:hidden p-2"
               aria-label="Toggle menu"
             >
@@ -92,3 +92,4 @@ export const Navbar = () => {
     </header>
   );
 };
+export default Navbar
