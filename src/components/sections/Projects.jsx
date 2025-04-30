@@ -28,6 +28,28 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
+                <div className="flex space-x-4">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                  >
+                    <Github size={16} className="mr-1" />
+                    GitHub
+                  </a>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                    >
+                      <ExternalLink size={16} className="mr-1" />
+                      Live Demo
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}
