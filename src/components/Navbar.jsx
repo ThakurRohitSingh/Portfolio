@@ -13,6 +13,7 @@ const navLinks = [
  const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -79,16 +80,36 @@ const navLinks = [
             </button>
 
             <button
-
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="md:hidden p-2"
               aria-label="Toggle menu"
             >
-
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-background/95 backdrop-blur-md shadow-md">
+          <nav className="container mx-auto px-4 py-4">
+            <ul className="space-y-4">
+              {navLinks.map((link) => (
+                <li key={link.title}>
+                  <a
+                    href={link.href}
+                    className={`nav-link block py-2 ${activeSection === link.href.substring(1) ? 'active' : ''}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
