@@ -24,7 +24,7 @@ Check it out here: [https://rohitsinghthakur.netlify.app/](https://rohitsinghtha
 - About me and skills overview
 - Contact form / social media links
 - Smooth animations and transitions
-- Light/Dark mode *(if applicable)*
+- Light/Dark mode
 
 ---
 
