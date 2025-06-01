@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Send } from 'lucide-react';
-import { toast, ToastContainer } from 'react-toastify'; // Importing both toast and ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Importing Toastify CSS
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const formRef = useRef();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,12 +24,25 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate successful submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast.success("Message sent! Thank you for your message. I'll get back to you soon.");
-      setFormData({ name: '', email: '', message: '' });
-    }, 1000);
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      formRef.current,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+
+      .then(
+        () => {
+          toast.success("Message sent! Thank you for your message. I'll get back to you soon.");
+          setFormData({ name: '', email: '', message: '' });
+          setIsSubmitting(false);
+        },
+        (error) => {
+          console.error('EmailJS error:', error);
+          toast.error("Failed to send message. Please try again later.");
+          setIsSubmitting(false);
+        }
+      );
   };
 
   return (
@@ -35,6 +51,7 @@ const Contact = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Get In Touch</h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Contact Info */}
           <div className="bg-card rounded-lg p-8 shadow-md">
             <h3 className="text-2xl font-semibold mb-4">Contact Information</h3>
             <p className="mb-6 text-muted-foreground">
@@ -53,9 +70,10 @@ const Contact = () => {
             </div>
           </div>
 
+          {/* Form */}
           <div className="bg-card rounded-lg p-8 shadow-md">
             <h3 className="text-2xl font-semibold mb-4">Send Message</h3>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block mb-1 font-medium">Name</label>
                 <input
@@ -108,4 +126,4 @@ const Contact = () => {
   );
 };
 
-export default Contact
+export default Contact;
