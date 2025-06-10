@@ -15,7 +15,7 @@ export const projects = [
     tags: ["React", "Vite", "Tailwind CSS","API Integration","Node.js","Express.js"],
     image: "/Quizzify.png",
     github: "https://github.com/ThakurRohitSingh/Quizzify",
-    demo: "https://Quizzify.example.com"
+    demo: "https://quizzifyf.netlify.app/"
   },
   {
     id: 3,
